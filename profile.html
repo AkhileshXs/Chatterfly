@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatterfly - Profile</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c, #1a1a1a);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #4CAF50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: #fff;
+        }
+
+        .profile-info {
+            margin-bottom: 20px;
+        }
+
+        .profile-info label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4CAF50;
+        }
+
+        .profile-info input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .profile-info input:focus {
+            outline: none;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CHATTERFLY </h1>
+        
+        <div class="profile-picture">P</div>
+        <form id="profileForm">
+            <div class="profile-info">
+                <label for="name">Name</label>
+                <input type="text" id="name" value="Damon Salvatore" required>
+            </div>
+            <div class="profile-info">
+                <label for="email">Email</label>
+                <input type="email" id="email" value="crazypants@hotmail.com" readonly>
+            </div>
+            <div class="profile-info">
+                <label for="working">Working in</label>
+                <input type="text" id="working" value="Software Development Intern" required>
+            </div>
+            <button type="submit" class="btn">Apply Changes</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+            
+        });
+    </script>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<script>
+        const coords = { x: 0, y: 0 };
+      const circles = document.querySelectorAll(".circle");
+      
+      const colors = [
+        "#ffb56b",
+        "#fdaf69",
+        "#f89d63",
+        "#f59761",
+        "#ef865e",
+        "#ec805d",
+        "#e36e5c",
+        "#df685c",
+        "#d5585c",
+        "#d1525c",
+        "#c5415d",
+        "#c03b5d",
+        "#b22c5e",
+        "#ac265e",
+        "#9c155f",
+        "#950f5f",
+        "#830060",
+        "#7c0060",
+        "#680060",
+        "#60005f",
+        "#48005f",
+        "#3d005e"
+      ];
+      
+      circles.forEach(function (circle, index) {
+        circle.x = 0;
+        circle.y = 0;
+        circle.style.backgroundColor = colors[index % colors.length];
+      });
+      
+      window.addEventListener("mousemove", function(e){
+        coords.x = e.clientX;
+        coords.y = e.clientY;
+        
+      });
+      
+      function animateCircles() {
+        
+        let x = coords.x;
+        let y = coords.y;
+        
+        circles.forEach(function (circle, index) {
+          circle.style.left = x - 12 + "px";
+          circle.style.top = y - 12 + "px";
+          
+          circle.style.scale = (circles.length - index) / circles.length;
+          
+          circle.x = x;
+          circle.y = y;
+      
+          const nextCircle = circles[index + 1] || circles[0];
+          x += (nextCircle.x - x) * 0.3;
+          y += (nextCircle.y - y) * 0.3;
+        });
+       
+        requestAnimationFrame(animateCircles);
+      }
+      
+      animateCircles();
+      </script>
+</body>
+</html>

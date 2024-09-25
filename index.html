@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatterfly - Welcome</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c, #1a1a1a);
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #4CAF50;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.9s ease;
+            text-align: center;
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        a {
+            color: #418643;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CHATTERFLY</h1>
+        <a href="signup.html" class="btn">Sign Up</a>
+        <a href="login.html" class="btn">Login</a>
+        
+        
+        <p>Welcome to Chatterfly!</p>
+        <p></p>
+    </div>
+
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+<div class="circle"></div>
+
+<script>
+        const coords = { x: 0, y: 0 };
+      const circles = document.querySelectorAll(".circle");
+      
+      const colors = [
+        "#ffb56b",
+        "#fdaf69",
+        "#f89d63",
+        "#f59761",
+        "#ef865e",
+        "#ec805d",
+        "#e36e5c",
+        "#df685c",
+        "#d5585c",
+        "#d1525c",
+        "#c5415d",
+        "#c03b5d",
+        "#b22c5e",
+        "#ac265e",
+        "#9c155f",
+        "#950f5f",
+        "#830060",
+        "#7c0060",
+        "#680060",
+        "#60005f",
+        "#48005f",
+        "#3d005e"
+      ];
+      
+      circles.forEach(function (circle, index) {
+        circle.x = 0;
+        circle.y = 0;
+        circle.style.backgroundColor = colors[index % colors.length];
+      });
+      
+      window.addEventListener("mousemove", function(e){
+        coords.x = e.clientX;
+        coords.y = e.clientY;
+        
+      });
+      
+      function animateCircles() {
+        
+        let x = coords.x;
+        let y = coords.y;
+        
+        circles.forEach(function (circle, index) {
+          circle.style.left = x - 12 + "px";
+          circle.style.top = y - 12 + "px";
+          
+          circle.style.scale = (circles.length - index) / circles.length;
+          
+          circle.x = x;
+          circle.y = y;
+      
+          const nextCircle = circles[index + 1] || circles[0];
+          x += (nextCircle.x - x) * 0.3;
+          y += (nextCircle.y - y) * 0.3;
+        });
+       
+        requestAnimationFrame(animateCircles);
+      }
+      
+      animateCircles();
+      </script>
+
+</body>
+</html>
