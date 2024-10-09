@@ -3,205 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatterfly - Sign Up</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Times New Roman', Times, serif;
-        }
+    <title>Your Site</title>
+    
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #1a1a1a, #2c2c2c, #1a1a1a);
-            color: #fff;
-        }
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 
-        .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 1.5rem;
-            color: #4CAF50;
-        }
-
-        .input-group {
-            margin-bottom: 1rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #444;
-            border-radius: 4px;
-            font-size: 1rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        input::placeholder {
-            color: #888;
-        }
-
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 0.75rem;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: center;
-            text-decoration: none;
-            margin-bottom: 1rem;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-
-        p {
-            text-align: center;
-            margin-top: 1rem;
-        }
-
-        a {
-            color: #4CAF50;
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <!-- Firebase Realtime Database -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+    
 </head>
 <body>
-    <div class="container">
-        <h1>CHATTERFLY</h1>
-        <form action="twofactor.html">
-            <div class="input-group">
-                <label for="signup-name">Name</label>
-                <input type="text" id="signup-name" placeholder="Enter your name" required>
-            </div>
-            <div class="input-group">
-                <label for="signup-email">Email</label>
-                <input type="email" id="signup-email" placeholder="Enter your email" required>
-            </div>
-            <div class="input-group">
-                <label for="signup-password">Password</label>
-                <input type="password" id="signup-password" placeholder="Enter your password" required>
-            </div>
-            <button type="submit" class="btn">Sign Up</button>
-        </form>
-        <p>Already have an account? <a href="login.html">Login</a></p>
-    </div>
-
+    <body>
+        <div class="container">
+            <h1>CHATTERFLY</h1>
+            <form action="twofactor.html">
+                <div class="input-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" placeholder="Enter your name" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    
+        <div class="circle"></div>
     <div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
-<div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    
+    <script>
+            const coords = { x: 0, y: 0 };
+          const circles = document.querySelectorAll(".circle");
+          
+          const colors = [
+            "#ffb56b",
+            "#fdaf69",
+            "#f89d63",
+            "#f59761",
+            "#ef865e",
+            "#ec805d",
+            "#e36e5c",
+            "#df685c",
+            "#d5585c",
+            "#d1525c",
+            "#c5415d",
+            "#c03b5d",
+            "#b22c5e",
+            "#ac265e",
+            "#9c155f",
+            "#950f5f",
+            "#830060",
+            "#7c0060",
+            "#680060",
+            "#60005f",
+            "#48005f",
+            "#3d005e"
+          ];
+          
+          circles.forEach(function (circle, index) {
+            circle.x = 0;
+            circle.y = 0;
+            circle.style.backgroundColor = colors[index % colors.length];
+          });
+          
+          window.addEventListener("mousemove", function(e){
+            coords.x = e.clientX;
+            coords.y = e.clientY;
+            
+          });
+          
+          function animateCircles() {
+            
+            let x = coords.x;
+            let y = coords.y;
+            
+            circles.forEach(function (circle, index) {
+              circle.style.left = x - 12 + "px";
+              circle.style.top = y - 12 + "px";
+              
+              circle.style.scale = (circles.length - index) / circles.length;
+              
+              circle.x = x;
+              circle.y = y;
+          
+              const nextCircle = circles[index + 1] || circles[0];
+              x += (nextCircle.x - x) * 0.3;
+              y += (nextCircle.y - y) * 0.3;
+            });
+           
+            requestAnimationFrame(animateCircles);
+          }
+          
+          animateCircles();
+          </script>
 
-<script>
-        const coords = { x: 0, y: 0 };
-      const circles = document.querySelectorAll(".circle");
-      
-      const colors = [
-        "#ffb56b",
-        "#fdaf69",
-        "#f89d63",
-        "#f59761",
-        "#ef865e",
-        "#ec805d",
-        "#e36e5c",
-        "#df685c",
-        "#d5585c",
-        "#d1525c",
-        "#c5415d",
-        "#c03b5d",
-        "#b22c5e",
-        "#ac265e",
-        "#9c155f",
-        "#950f5f",
-        "#830060",
-        "#7c0060",
-        "#680060",
-        "#60005f",
-        "#48005f",
-        "#3d005e"
-      ];
-      
-      circles.forEach(function (circle, index) {
-        circle.x = 0;
-        circle.y = 0;
-        circle.style.backgroundColor = colors[index % colors.length];
-      });
-      
-      window.addEventListener("mousemove", function(e){
-        coords.x = e.clientX;
-        coords.y = e.clientY;
-        
-      });
-      
-      function animateCircles() {
-        
-        let x = coords.x;
-        let y = coords.y;
-        
-        circles.forEach(function (circle, index) {
-          circle.style.left = x - 12 + "px";
-          circle.style.top = y - 12 + "px";
-          
-          circle.style.scale = (circles.length - index) / circles.length;
-          
-          circle.x = x;
-          circle.y = y;
-      
-          const nextCircle = circles[index + 1] || circles[0];
-          x += (nextCircle.x - x) * 0.3;
-          y += (nextCircle.y - y) * 0.3;
+    <!-- Your HTML content here -->
+    
+    <script>
+       // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyC1h3RiB0IXg5tML25crxcWpMKLRdNi95A",
+  authDomain: "chatterfly-pse.firebaseapp.com",
+  projectId: "chatterfly-pse",
+  storageBucket: "chatterfly-pse.appspot.com",
+  messagingSenderId: "889410000933",
+  appId: "1:889410000933:web:ff287d75693c918dcc87cc",
+  measurementId: "G-ZRCFZDNG7G"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+        // Function to save user data to Firebase
+        function saveUserData(userId, email) {
+            const userRef = database.ref('users/' + userId);
+            userRef.set({
+                email: email,
+                signUpDate: new Date().toISOString()
+            })
+            .then(() => {
+                console.log("User data saved successfully.");
+            })
+            .catch((error) => {
+                console.error("Error saving user data:", error);
+            });
+        }
+
+        // Function to sign up a new user
+        function signUp(email, password) {
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;  // Get the signed-up user's info
+                    console.log('User signed up:', user);
+                    
+                    // Save the user data to the Realtime Database
+                    saveUserData(user.uid, email);
+                })
+                .catch((error) => {
+                    console.error('Error signing up:', error);
+                });
+        }
+
+        // Example usage: You might want to trigger this on form submission
+        // For example, you can call signUp('test@example.com', 'password123') on form submit event
+    </script>
+    <script>
+        // Handle the form submission
+        document.getElementById('signUpForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting the usual way
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Call the signUp function to create the user and save their data
+            signUp(email, password);
         });
-       
-        requestAnimationFrame(animateCircles);
-      }
-      
-      animateCircles();
-      </script>
+    </script>
 </body>
 </html>
