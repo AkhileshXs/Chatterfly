@@ -69,6 +69,12 @@
             align-items: center;
             padding: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .chat-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .chat-avatar {
@@ -134,6 +140,71 @@
             margin-left: 10px;
         }
 
+        .new-chat-corner-btn {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .new-chat-corner-btn:hover {
+            background-color: #45a049;
+        }
+
+        .chat-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+            background-color: #2c2c2c;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .chat-popup-header {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-popup-messages {
+            height: 320px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .chat-popup-input {
+            display: flex;
+            padding: 10px;
+        }
+
+        .chat-popup-input input {
+            flex-grow: 1;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+        }
+
+        .chat-popup-input button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            margin-left: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 10px;
@@ -153,6 +224,11 @@
             .search-bar input {
                 width: 100%;
             }
+
+            .new-chat-corner-btn {
+                margin-top: 10px;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -163,10 +239,11 @@
             <div class="search-bar">
                 <input type="text" placeholder="Search chats">
             </div>
+            <button class="new-chat-corner-btn">New Chat</button>
             <a href="profile.html" class="profile-btn" aria-label="Go to profile">P</a>
         </header>
         <main class="chat-list">
-            <div class="chat-item">
+            <div class="chat-item" data-chat-id="1">
                 <div class="chat-avatar">A</div>
                 <div class="chat-details">
                     <div class="chat-name">Akhilesh </div>
@@ -174,7 +251,7 @@
                 </div>
                 <div class="chat-time">14m ago</div>
             </div>
-            <div class="chat-item">
+            <div class="chat-item" data-chat-id="2">
                 <div class="chat-avatar">A</div>
                 <div class="chat-details">
                     <div class="chat-name">Abhishek</div>
@@ -182,7 +259,7 @@
                 </div>
                 <div class="chat-time">1h ago</div>
             </div>
-            <div class="chat-item">
+            <div class="chat-item" data-chat-id="3">
                 <div class="chat-avatar">K</div>
                 <div class="chat-details">
                     <div class="chat-name">Keerthana</div>
@@ -190,7 +267,7 @@
                 </div>
                 <div class="chat-time">3h ago</div>
             </div>
-            <div class="chat-item">
+            <div class="chat-item" data-chat-id="4">
                 <div class="chat-avatar">V</div>
                 <div class="chat-details">
                     <div class="chat-name">Varun</div>
@@ -198,7 +275,7 @@
                 </div>
                 <div class="chat-time">1d ago</div>
             </div>
-            <div class="chat-item">
+            <div class="chat-item" data-chat-id="5">
                 <div class="chat-avatar">S</div>
                 <div class="chat-details">
                     <div class="chat-name">Sidharth</div>
@@ -209,5 +286,93 @@
         </main>
     </div>
     <a href="#" class="new-chat-btn" aria-label="Start new chat">+</a>
+
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-popup-header">
+            <span id="chatPopupName"></span>
+            <button onclick="closeChatPopup()">Close</button>
+        </div>
+        <div class="chat-popup-messages" id="chatPopupMessages"></div>
+        <div class="chat-popup-input">
+            <input type="text" id="chatPopupInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        const chatItems = document.querySelectorAll('.chat-item');
+        const chatPopup = document.getElementById('chatPopup');
+        const chatPopupName = document.getElementById('chatPopupName');
+        const chatPopupMessages = document.getElementById('chatPopupMessages');
+        const chatPopupInput = document.getElementById('chatPopupInput');
+
+        const sampleMessages = {
+            1: [
+                { sender: 'You', message: 'Hey Akhilesh, are you free now?' },
+                { sender: 'Akhilesh', message: 'Hey, I\'m busy right now.' },
+                { sender: 'You', message: 'No problem, I\'ll catch you later.' }
+            ],
+            2: [
+                { sender: 'Abhishek', message: 'Did you like my tabla composition?' },
+                { sender: 'You', message: 'Yes, it was amazing! The rhythm was so intricate.' },
+                { sender: 'Abhishek', message: 'Thanks! I\'ve been practicing a lot lately.' }
+            ],
+            3: [
+                { sender: 'You', message: 'Hi Keerthana, how\'s the project going?' },
+                { sender: 'Keerthana', message: 'It\'s going well. Did you complete the work?' },
+                { sender: 'You', message: 'I\'m almost done. I\'ll send it to you by tonight.' }
+            ],
+            4: [
+                { sender: 'Varun', message: 'Thanks for the help!' },
+                { sender: 'You', message: 'You\'re welcome! Let me know if you need anything else.' },
+                { sender: 'Varun', message: 'Will do. You\'re a lifesaver!' }
+            ],
+            5: [
+                { sender: 'Sidharth', message: 'Did anyone complete the interface?' },
+                { sender: 'You', message: 'I\'m working on it right now. Should be done soon.' },
+                { sender: 'Sidharth', message: 'Great! Can\'t wait to see it.' }
+            ]
+        };
+
+        chatItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const chatId = item.getAttribute('data-chat-id');
+                const chatName = item.querySelector('.chat-name').textContent;
+                openChatPopup(chatId, chatName);
+            });
+        });
+
+        function openChatPopup(chatId, chatName) {
+            chatPopupName.textContent = chatName;
+            chatPopupMessages.innerHTML = '';
+            sampleMessages[chatId].forEach(msg => {
+                const messageElement = document.createElement('p');
+                messageElement.textContent = `${msg.sender}: ${msg.message}`;
+                chatPopupMessages.appendChild(messageElement);
+            });
+            chatPopup.style.display = 'block';
+        }
+
+        function closeChatPopup() {
+            chatPopup.style.display = 'none';
+        }
+
+        function sendMessage() {
+            const message = chatPopupInput.value.trim();
+            if (message) {
+                const messageElement = document.createElement('p');
+                messageElement.textContent = `You: ${message}`;
+                chatPopupMessages.appendChild(messageElement);
+                chatPopupInput.value = '';
+                chatPopupMessages.scrollTop = chatPopupMessages.scrollHeight;
+            }
+        }
+
+        chatPopupInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
 </body>
 </html>
